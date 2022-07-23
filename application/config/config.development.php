@@ -62,10 +62,10 @@ return array(
      * DB_CHARSET The charset, necessary for security reasons. Check Database.php class for more info.
      */
     'DB_TYPE' => 'mysql',
-    'DB_HOST' => '127.0.0.1',
+    'DB_HOST' => 'localhost',
     'DB_NAME' => 'huge',
     'DB_USER' => 'root',
-    'DB_PASS' => '12345678',
+    'DB_PASS' => '',
     'DB_PORT' => '3306',
     'DB_CHARSET' => 'utf8',
     /**
@@ -153,4 +153,11 @@ return array(
     'EMAIL_VERIFICATION_FROM_NAME' => 'My Project',
     'EMAIL_VERIFICATION_SUBJECT' => 'Account activation for PROJECT XY',
     'EMAIL_VERIFICATION_CONTENT' => 'Please click on this link to activate your account: ',
+
+    /**
+   * User Permission Settings
+   */
+   'DEFAULT_GUEST_USER_ROLE' => 0,
+   'DEFAULT_BANNED_USER_ROLE' => 1,
+   'DEFAULT_NEW_USER_ROLE' => 2,
 );
