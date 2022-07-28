@@ -10,28 +10,28 @@
 [![Support](https://supporterhq.com/api/b/9guz00i6rep05k1mwxyquz30k)](https://supporterhq.com/give/9guz00i6rep05k1mwxyquz30k)
 
 Just a simple user authentication solution inside a super-simple framework skeleton that works out-of-the-box
-(and comes with an auto-installer), using the future-proof official bcrypt password hashing/salting implementation of 
-PHP 5.5+, plus some nice features that will speed up the time from idea to first usable prototype application 
-dramatically. Nothing more. This project has its focus on hardcore simplicity. Everything is as simple as possible, 
-made for smaller projects, typical agency work and quick drafts. If you want to build massive corporate 
-applications with all the features modern frameworks have, then have a look at [Laravel](http://laravel.com), 
+(and comes with an auto-installer), using the future-proof official bcrypt password hashing/salting implementation of
+PHP 5.5+, plus some nice features that will speed up the time from idea to first usable prototype application
+dramatically. Nothing more. This project has its focus on hardcore simplicity. Everything is as simple as possible,
+made for smaller projects, typical agency work and quick drafts. If you want to build massive corporate
+applications with all the features modern frameworks have, then have a look at [Laravel](http://laravel.com),
 [Symfony](http://symfony.com) or [Yii](http://www.yiiframework.com), but if you just want to quickly create something
 that just works, then this script might be interesting for you.
 
-HUGE's simple-as-possible architecture was inspired by several conference talks, slides and articles about huge 
-applications that - surprisingly and intentionally - go back to the basics of programming, using procedural programming, 
-static classes, extremely simple constructs, not-totally-DRY code etc. while keeping the code extremely readable 
+HUGE's simple-as-possible architecture was inspired by several conference talks, slides and articles about huge
+applications that - surprisingly and intentionally - go back to the basics of programming, using procedural programming,
+static classes, extremely simple constructs, not-totally-DRY code etc. while keeping the code extremely readable
 ([StackOverflow](http://www.dev-metal.com/architecture-stackoverflow/), Wikipedia, SoundCloud).
 
-Some interesting Buzzwords in this context: [KISS](http://en.wikipedia.org/wiki/KISS_principle), 
+Some interesting Buzzwords in this context: [KISS](http://en.wikipedia.org/wiki/KISS_principle),
 [YAGNI](http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it), [Feature Creep](https://en.wikipedia.org/wiki/Feature_creep),
 [Minimum viable product](https://en.wikipedia.org/wiki/Minimum_viable_product).
 
 #### HUGE has reached "soft End Of Life"
 
-To keep this project stable, secure, clean and minimal I've decided to reduce the development of HUGE to a 
-minimum. *Don't worry, this is actually a good thing:* New features usually mean new bugs, lots of testing, fixes, 
-incompatibilities, and for some people even hardcore update stress. As HUGE is a security-critical script new features 
+To keep this project stable, secure, clean and minimal I've decided to reduce the development of HUGE to a
+minimum. *Don't worry, this is actually a good thing:* New features usually mean new bugs, lots of testing, fixes,
+incompatibilities, and for some people even hardcore update stress. As HUGE is a security-critical script new features
 are not as important as a stable and secure core, this is why people use it. This means:
 
 - HUGE will not get new features
@@ -39,12 +39,12 @@ are not as important as a stable and secure core, this is why people use it. Thi
 
 And to be honest, maintaining a framework for free in my rare free-time is also not what I want to do permanently. :)
 
-Finally a little note: The PHP world has evolved dramatically, we have excellent frameworks with awesome features and 
-big professional teams behind, very well written documentations and large communities, so there's simply no reason 
+Finally a little note: The PHP world has evolved dramatically, we have excellent frameworks with awesome features and
+big professional teams behind, very well written documentations and large communities, so there's simply no reason
 to put much work into another framework. Instead, please commit to the popular frameworks, then your work will have
 much more impact and is used by much more people!
 
-Thanks to everybody around this project, have a wonderful time! 
+Thanks to everybody around this project, have a wonderful time!
 XOXO,
 Chris
 
@@ -54,7 +54,7 @@ Chris
 * public beta branch: [master](https://github.com/panique/huge)
 * public in-development branch (please commit new code here): [develop](https://github.com/panique/huge/tree/develop)
 
-#### Quick-Index 
+#### Quick-Index
 
 + [Features](#features)
 + [Live-Demo](#live-demo)
@@ -83,9 +83,9 @@ Chris
 
 ### The History of HUGE
 
-Back in 2010/2011 there were no useful login solutions in the PHP world, at least not for non-experts. So I did the worst 
+Back in 2010/2011 there were no useful login solutions in the PHP world, at least not for non-experts. So I did the worst
 mistake every young developer does: Trying to build something by myself without having any clue about security basics.
-What made it even worse was: The web was (and is) full of totally broken tutorials about building user authentication 
+What made it even worse was: The web was (and is) full of totally broken tutorials about building user authentication
 systems, even the biggest companies in the world did this completely wrong (we are talking about SONY, LinkedIn and
 Adobe here), and also lots of major framework in all big programming languages (!) used totally outdated and insecure
 password saving technologies.
@@ -97,15 +97,15 @@ about security internals. The script was so awesome that it was written into the
 When this came out I tried to use this naked library to build a fully working out-of-the-box login system for several private and commercial projects,
 and put the code on GitHub. Lots of people found this useful, contributed and bugfixed the project, made forks, smaller and larger versions.
 The result is this project.
- 
-Please note: Now, in 2015, most major frameworks have excellent user authentication logic embedded by default. This was 
+
+Please note: Now, in 2015, most major frameworks have excellent user authentication logic embedded by default. This was
 not the case years ago. So, from today's perspective it might be smarter to chose Laravel, Yii or Symfony for serious
 projects. But feel free to try out HUGE, the auto-installer will spin up a fully working installation within minutes and
 without any configuration.
 
-And why the name "HUGE" ? It's a nice combination to 
-[TINY](https://github.com/panique/tiny), 
-[MINI](https://github.com/panique/mini) and 
+And why the name "HUGE" ? It's a nice combination to
+[TINY](https://github.com/panique/tiny),
+[MINI](https://github.com/panique/mini) and
 [MINI2](https://github.com/panique/mini2),
 [MINI3](https://github.com/panique/mini3),
 which are some of my other older projects. Super-minimal micro frameworks for extremely fast and simple development of simple websites.
@@ -124,7 +124,7 @@ which are some of my other older projects. Super-minimal micro frameworks for ex
 * simple user types (type 1, type 2, admin)
 * supports local avatars and remote Gravatars
 * supports native mail and SMTP sending (via PHPMailer and other tools)
-* uses PDO for database access for sure, has nice DatabaseFactory (in case your project goes big) 
+* uses PDO for database access for sure, has nice DatabaseFactory (in case your project goes big)
 * uses URL rewriting ("beautiful URLs")
 * proper split of application and public files (requests only go into /public)
 * uses Composer to load external dependencies (PHPMailer, Captcha-Generator, etc.) for sure
@@ -136,7 +136,7 @@ which are some of my other older projects. Super-minimal micro frameworks for ex
 ### Planned features
 
 * A real documentation (currently there's none, but the code is well commented)
-  
+
 ### Live-Demo <a name="live-demo"></a>
 
 See a [live demo of older 3.0 version here](http://104.131.8.128) and [the server's phpinfo() here](104.131.8.128/info.php).
@@ -154,7 +154,7 @@ Also feel free to contribute to this project.
 
 ### License <a name="license"></a>
 
-Licensed under [MIT](http://www.opensource.org/licenses/mit-license.php). 
+Licensed under [MIT](http://www.opensource.org/licenses/mit-license.php).
 Totally free for private or commercial projects.
 
 ### Requirements <a name="requirements"></a>
@@ -176,7 +176,7 @@ This will save you masses of time and nerves. Donate a coffee if you like it.
 
 #### Auto-Installation (in Vagrant) <a name="auto-installation-vagrant"></a>
 
-If you are using Vagrant for your development, then simply 
+If you are using Vagrant for your development, then simply
 
 1. Add the official Ubuntu 14.04 LTS box to your Vagrant: `vagrant box add ubuntu/trusty64`
 2. Move *Vagrantfile* and *bootstrap.sh* (from *_one-click-installation* folder) to a folder where you want to initialize your project.
@@ -208,7 +208,7 @@ sudo ./bootstrap.sh
 
 #### Quick guide: <a name="quick-installation"></a>
 
-0. Make sure you have Apache, PHP, MySQL installed. [Tutorial](http://www.dev-metal.com/installsetup-basic-lamp-stack-linux-apache-mysql-php-ubuntu-14-04-lts/). 
+0. Make sure you have Apache, PHP, MySQL installed. [Tutorial](http://www.dev-metal.com/installsetup-basic-lamp-stack-linux-apache-mysql-php-ubuntu-14-04-lts/).
 1. Clone the repo to a folder on your server
 2. Activate mod_rewrite, route all traffic to application's /public folder. [Tutorial](http://www.dev-metal.com/enable-mod_rewrite-ubuntu-14-04-lts/).
 3. Edit application/config: Set your database credentials
@@ -224,8 +224,8 @@ sudo ./bootstrap.sh
 
 This is just a quick guideline for easy setup of a development environment!
 
-Make sure you have Apache, PHP 5.5+ and MySQL installed. [Tutorial here](http://www.dev-metal.com/installsetup-basic-lamp-stack-linux-apache-mysql-php-ubuntu-14-04-lts/). 
-Nginx will work for sure too, but no install guidelines are available yet. 
+Make sure you have Apache, PHP 5.5+ and MySQL installed. [Tutorial here](http://www.dev-metal.com/installsetup-basic-lamp-stack-linux-apache-mysql-php-ubuntu-14-04-lts/).
+Nginx will work for sure too, but no install guidelines are available yet.
 
 Edit vhost to make clean URLs possible and route all traffic to /public folder of your project:
 ```bash
@@ -308,9 +308,9 @@ Then check your server's IP / domain. Everything should work fine.
 
 #### NGINX setup: <a name="nginx-setup"></a>
 
-This is an untested NGINX setup. Please comment [on the ticket](https://github.com/panique/huge/issues/622) if you see 
+This is an untested NGINX setup. Please comment [on the ticket](https://github.com/panique/huge/issues/622) if you see
 issues.
- 
+
 ```
 server {
     # your listening port
@@ -347,7 +347,7 @@ server {
 
 #### IIS setup: <a name="iis-setup"></a>
 
-Big thanks to razuro for this fine setup: Put this inside your root folder, but don't put any web.config in your public 
+Big thanks to razuro for this fine setup: Put this inside your root folder, but don't put any web.config in your public
 folder.
 
 ```
@@ -355,7 +355,7 @@ folder.
     <system.webServer>
         <rewrite>
             <rules>
-			
+
                 <rule name="Imported Rule 1" stopProcessing="true">
                     <match url="^(.*)$" ignoreCase="false" />
 					<conditions logicalGrouping="MatchAll">
@@ -376,7 +376,7 @@ Find the original [ticket here](https://github.com/panique/huge/issues/788).
 
 By default there are two demo users, a normal user and an admin user. For more info on that please have a look on the
 user role part of the small documentation block inside this readme.
- 
+
 Normal user: Username is `demo2`, password is `12345678`. The user is already activated.
 Admin user (can delete and suspend other users): Username is `demo`, password is `12345678`. The user is already activated.
 
@@ -394,30 +394,30 @@ There are several files in the root folder of the project that might be irritati
    your project.
  - *composer.json* (important): You should know what this does. ;) This file says what external dependencies are used.  
  - *travis-ci-apache* (can be deleted): Config file for Travis, see above, so Travis knows how to setup the Apache.    
-    
+
 *README* and *CHANGELOG* are self-explaining.
 
 ### Documentation <a name="documentation"></a>
 
-A real documentation is in the making. Until then, please have a look at the code and use your IDE's code completion 
+A real documentation is in the making. Until then, please have a look at the code and use your IDE's code completion
 features to get an idea how things work, it's quite obvious when you look at the controller files, the model files and
 how data is shown in the view files. A big sorry that there's no documentation yet, but time is rare and we are all
 doing this for free in our free time :)
- 
+
  - TODO: Full documentation
  - TODO: Basic examples on how to do things
- 
+
 #### How to use the different user roles <a name="user_roles"></a>
 
 Currently there are two types of users: Normal users and admins. There are exactly the same, but...
- 
+
 1. Admin users can delete and suspend other users, they have an additional button "admin" in the navigation. Admin users
-have a value of `7` inside the database table field `user_account_type`. They cannot upgrade or downgrade their accounts 
+have a value of `7` inside the database table field `user_role`. They cannot upgrade or downgrade their accounts 
 (as this wouldn't make sense).
 
 2. Normal users don't have admin features for sure. But they can upgrade and downgrade their accounts (try it out via
-/user/changeUserRole), which is basically a super-simple implementation of the basic-user / premium-user concept. 
-Normal users have a value of `1` or `2` inside the database table field `user_account_type`. By default all new 
+/user/changeUserRole), which is basically a super-simple implementation of the basic-user / premium-user concept.
+Normal users have a value of `1` or `2` inside the database table field `user_role`. By default all new
 registered users are normal users with user role 1 for sure.
 
 See the "Testing with demo users" section of this readme for more info.
@@ -427,13 +427,13 @@ which is not integrated into the project as it's too advanced and complex. But, 
 feel free to try.
 
 #### How to use the CSRF feature <a name="csrf"></a>
- 
-To prevent [CSRF attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery), HUGE does this in the most common 
-way, by using a security *token* when the user submits critical forms. This means: When PHP renders a form for the user, 
-the application puts a "random string" inside the form (as a hidden input field), generated via Csrf::makeToken() 
-(application/core/Csrf.php), which also saves this token to the session. When the form is submitted, the application 
+
+To prevent [CSRF attacks](https://en.wikipedia.org/wiki/Cross-site_request_forgery), HUGE does this in the most common
+way, by using a security *token* when the user submits critical forms. This means: When PHP renders a form for the user,
+the application puts a "random string" inside the form (as a hidden input field), generated via Csrf::makeToken()
+(application/core/Csrf.php), which also saves this token to the session. When the form is submitted, the application
 checks if the POST request contains exactly the form token that is inside the session.
-  
+
 This CSRF prevention feature is currently implemented on the login form process (see *application/view/login/index.php*)
 and user name change form process (see *application/view/user/editUsername.php*), most other forms are not security-
 critical and should stay as simple as possible.
@@ -454,21 +454,21 @@ A big thanks to OmarElGabry for implementing this!
 
 #### Can a user be logged in from multiple devices ?
 
-In theory: Yes, but this feature didn't work in my tests. As it's an external feature please have a look into the 
+In theory: Yes, but this feature didn't work in my tests. As it's an external feature please have a look into the
 [according ticket](https://github.com/panique/huge/pull/693) for more.
 
 #### Troubleshooting & Glitches
 
 * In 3.0 and 3.1 a user could log into the application from different devices / browsers / locations. This was intended
-  behaviour as this is standard in most web applications these days. In 3.2 still feature is "missing" by default, a 
-  user will only be able to log in from one browser at the same time. This is a security improvement, but for sure not 
-  optimal for many developers. The plan is to implement a config switch that will allow / disallow logins from multiple 
+  behaviour as this is standard in most web applications these days. In 3.2 still feature is "missing" by default, a
+  user will only be able to log in from one browser at the same time. This is a security improvement, but for sure not
+  optimal for many developers. The plan is to implement a config switch that will allow / disallow logins from multiple
   browsers.
-* Using this on a sub-domain ? You might get problems with the cookies in IE11. Fix this by replacing "/" with "./" of 
-  the cookie location COOKIE_PATH inside application/config/config.xxx.php! 
+* Using this on a sub-domain ? You might get problems with the cookies in IE11. Fix this by replacing "/" with "./" of
+  the cookie location COOKIE_PATH inside application/config/config.xxx.php!
   Check [ticket #733](https://github.com/panique/huge/issues/733) for more info. Thanks to jahbiuabft for figuring this
   out. Update: There's another ticket focusing on the same issue: [ticket #681](https://github.com/panique/huge/issues/681)
- 
+
 ### Community-provided features & feature discussions <a name="community"></a>
 
 There are some awesome features or feature ideas build by awesome people, but these features are too special-interest
@@ -480,16 +480,16 @@ to go into the main version of HUGE, but have a look into these tickets if you a
  - [Using controller A inside controller B](https://github.com/panique/huge/issues/706)
  - [HTML mails](https://github.com/panique/huge/issues/738)
  - [Deep user roles / user permission system](https://github.com/panique/huge/pull/691)
- 
+
 ### Future of HUGE: Announcing "soft End Of Life" <a name="future"></a>
- 
+
 The idea of this project is and was to provide a super-simple barebone application with a full user authentication
-system inside that just works fine and stable. Due to the highly security-related nature of this script any changes 
+system inside that just works fine and stable. Due to the highly security-related nature of this script any changes
 mean a lot of work, lots of testing, catching edge cases etc., and in the end I spent 90% of the time testing and fixing
 new features or new features break existing stuff, and doing this is really not what anybody wants to do for free in
 the rare free-time :)
 
-To keep the project stable, clean and maintainable, I would kindly announce the "soft-End of Life" for this project, 
+To keep the project stable, clean and maintainable, I would kindly announce the "soft-End of Life" for this project,
 meaning:
 
 A. HUGE will not get any new features in the future, but ...
@@ -504,11 +504,11 @@ While HUGE was in development, there were 3 main rules that helped me (and proba
 2. Don't implement features that are not needed by most users.
 3. Only build everything for the most common use case (like MySQL, not PostGre, NoSQL etc).
 
-As noted in the intro of this README, there are also some powerful concepts that might help you when developing cool 
-stuff: [KISS](http://en.wikipedia.org/wiki/KISS_principle), 
+As noted in the intro of this README, there are also some powerful concepts that might help you when developing cool
+stuff: [KISS](http://en.wikipedia.org/wiki/KISS_principle),
 [YAGNI](http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it), [Feature Creep](https://en.wikipedia.org/wiki/Feature_creep),
 [Minimum viable product](https://en.wikipedia.org/wiki/Minimum_viable_product).
- 
+
 #### List of features / ideas provided in tickets / pull requests
 
 To avoid unnecessary work for all of us I would kindly recommend everybody to use HUGE for simple project that only
@@ -516,10 +516,10 @@ need the features that already exist, and if you really need a RESTful architect
 then it's easier, cleaner and faster to simply use Laravel, Symfony or Zend.
 
 However, here are the community-suggested possible features, taken from lots of tickets. Feel free to implement them
-into your forks of the project: 
+into your forks of the project:
 
-* OAuth2 implementation (let your users create accounts and login via 3rd party auth, like Facebook, Twitter, GitHub, 
-  etc). As this is a lot of work and would make the project much more complicated it might make sense to do this in a 
+* OAuth2 implementation (let your users create accounts and login via 3rd party auth, like Facebook, Twitter, GitHub,
+  etc). As this is a lot of work and would make the project much more complicated it might make sense to do this in a
   fork or totally skip it. (see [Ticket #528](https://github.com/panique/huge/issues/528))
 * Router (map all URLs to according controller-methods inside one file), [Ticket 727](https://github.com/panique/huge/issues/727)
 * RESTful architecture (see [ticket #488](https://github.com/panique/huge/issues/488) for discussion)
@@ -530,8 +530,8 @@ into your forks of the project:
 * Controller-less URLs (see [ticket #704](https://github.com/panique/huge/issues/704))
 * Email-re-validation after email change (see [ticket #705](https://github.com/panique/huge/issues/705))
 * Connect to multiple databases (see [ticket #702](https://github.com/panique/huge/issues/702))
-* A deeper user role system (see [ticket #701](https://github.com/panique/huge/issues/701), 
-[pull-request #691](https://github.com/panique/huge/pull/691)), 
+* A deeper user role system (see [ticket #701](https://github.com/panique/huge/issues/701),
+[pull-request #691](https://github.com/panique/huge/pull/691)),
 [ticket #603](https://github.com/panique/huge/issues/603)
 * How to run without using Composer [ticket #826](https://github.com/panique/huge/issues/826)
 
@@ -539,32 +539,32 @@ into your forks of the project:
 
 There were two (!) support forums for v1 and v2 of this project (HUGE is v3), and both were vandalized by people who
 didn't even read the readme and / or the install guidelines. Most asked question was "script does not work plz help"
-without giving any useful information (like code or server setup or even the version used). While I'm writing these 
-lines somebody just asked via Twitter "how to install without Composer". You know what I mean :) - 99% of the questions 
-were not necessary if the people would had read the guidelines, do a minimal research on their own or would stop making 
-things so unnecessarily complicated. And even when writing detailed answers most of them still messed it up, resulting 
-in rants and complaints (for free support for a free software!). It was just frustrating to deal with this every day, 
-especially when people take it for totally granted that *it's the duty* of open-source developers to give detailed, 
+without giving any useful information (like code or server setup or even the version used). While I'm writing these
+lines somebody just asked via Twitter "how to install without Composer". You know what I mean :) - 99% of the questions
+were not necessary if the people would had read the guidelines, do a minimal research on their own or would stop making
+things so unnecessarily complicated. And even when writing detailed answers most of them still messed it up, resulting
+in rants and complaints (for free support for a free software!). It was just frustrating to deal with this every day,
+especially when people take it for totally granted that *it's the duty* of open-source developers to give detailed,
 free and personal support for every "plz help"-request.
- 
+
 So I decided to completely stop any free support. For serious questions about real problems inside the script please
 use the GitHub issues feature.
 
 ### Zero tolerance for idiots, trolls and vandals! <a name="zero-tolerance"></a>
 
-Harsh words, but as basically every public internet project gets harassed, vandalized and trolled these days by very 
-strange people it's necessary: Some simple rules. 
+Harsh words, but as basically every public internet project gets harassed, vandalized and trolled these days by very
+strange people it's necessary: Some simple rules.
 
-1. Respect that this is just a simple script written by unpaid volunteers in their free-time. 
+1. Respect that this is just a simple script written by unpaid volunteers in their free-time.
    This is NOT business-software you've bought for $10.000.
    There's no reason to complain (!) about free open-source software. The attitude against free software
    is really frustrating these days, people take everything for granted without realizing the work behind it, and the
-   fact that they get serious software totally for free, saving thousands of dollars. If you don't like it, then don't 
-   use it. If you want a feature, try to take part in the process, maybe even build it by yourself and add it to the 
+   fact that they get serious software totally for free, saving thousands of dollars. If you don't like it, then don't
+   use it. If you want a feature, try to take part in the process, maybe even build it by yourself and add it to the
    project! Be nice and respectful. Constructive criticism is for sure always welcome!
-   
-2. Don't bash, don't hate, don't spam, don't vandalize. Please don't ask for personal free support, don't ask if 
-   somebody could do your work for you. Before you ask something, make sure you've read the README, followed every 
+
+2. Don't bash, don't hate, don't spam, don't vandalize. Please don't ask for personal free support, don't ask if
+   somebody could do your work for you. Before you ask something, make sure you've read the README, followed every
    tutorial, double-checked the code and tried to solve the problem by yourself.
 
 Trolls and very annoying people will get a permanent ban / block. GitHub has a very powerful anti-abuse team.
@@ -578,7 +578,7 @@ Please commit only in *develop* branch. The *master* branch will always contain 
 [Scrutinizer (master branch)](https://scrutinizer-ci.com/g/panique/huge/?branch=master),
 [Scrutinizer (develop branch)](https://scrutinizer-ci.com/g/panique/huge/?branch=develop),
 [Code Climate](https://codeclimate.com/github/panique/huge),
-[Codacy](https://www.codacy.com/public/panique/phplogin/dashboard?bid=789836), 
+[Codacy](https://www.codacy.com/public/panique/phplogin/dashboard?bid=789836),
 [SensioLabs Insight](https://insight.sensiolabs.com/projects/d4f4e3c0-1445-4245-8cb2-d75026c11fa7/analyses/2).
 
 ### Found a bug (Responsible Disclosure) ? <a name="bug-report"></a>
@@ -594,8 +594,8 @@ https://github.com/panique/huge/issues?state=open
 
 ### Why you should use a favicon.ico in your project :)
 
-Interesting issue: When a user hits your website, the user's browser will also request one or more (!) favicons 
-(different sizes). If these static files don't exist, your application will start to generate a 404 response and a 404 
+Interesting issue: When a user hits your website, the user's browser will also request one or more (!) favicons
+(different sizes). If these static files don't exist, your application will start to generate a 404 response and a 404
 page for each file. This wastes a lot of server power and is also useless, therefore make sure you always have favicons
 or handle this from Apache/nginx level.
 
@@ -622,10 +622,10 @@ More here on Stackflow: [How to prevent favicon.ico requests?](http://stackoverf
 
 - [interesting article about password resets (by Troy Hunt, security expert)](http://www.troyhunt.com/2012/05/everything-you-ever-wanted-to-know.html)
 - Password-Free Email Logins: [Ticket & discussion](https://github.com/panique/huge/issues/674), [article](http://techcrunch.com/2015/06/30/blogging-site-medium-rolls-out-password-free-email-logins/?ref=webdesignernews.com)
-- Logging in via QR code: [Ticket & discussion](https://github.com/panique/huge/issues/290), [english article](https://www.grc.com/sqrl/sqrl.htm), 
-  [german article](http://www.phpgangsta.de/sesam-oeffne-dich-sicher-einloggen-im-internetcafe), 
+- Logging in via QR code: [Ticket & discussion](https://github.com/panique/huge/issues/290), [english article](https://www.grc.com/sqrl/sqrl.htm),
+  [german article](http://www.phpgangsta.de/sesam-oeffne-dich-sicher-einloggen-im-internetcafe),
   [repo](https://github.com/PHPGangsta/Sesame), [live-demo](http://sesame.phpgangsta.de/). Big thanks to *PHPGangsta* for writing this!
-  
+
 ### My blog
 
 I'm also blogging at **[Dev Metal](http://www.dev-metal.com)**.

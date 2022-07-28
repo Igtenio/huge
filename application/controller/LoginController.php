@@ -44,7 +44,7 @@ class LoginController extends Controller
 
         // perform the login method, put result (true or false) into $login_successful
         $login_successful = LoginModel::login(
-            Request::post('user_name'), Request::post('user_password'), Request::post('set_remember_me_cookie')
+            Request::post('user_username'), Request::post('user_password'), Request::post('set_remember_me_cookie')
         );
 
         // check login status: if true, then redirect user to user/index, if false, then to login form again
@@ -106,22 +106,22 @@ class LoginController extends Controller
      */
     public function requestPasswordReset_action()
     {
-        PasswordResetModel::requestPasswordReset(Request::post('user_name_or_email'), Request::post('captcha'));
+        PasswordResetModel::requestPasswordReset(Request::post('user_username_or_email'), Request::post('captcha'));
         Redirect::to('login/index');
     }
 
     /**
      * Verify the verification token of that user (to show the user the password editing view or not)
-     * @param string $user_name username
+     * @param string $user_username username
      * @param string $verification_code password reset verification token
      */
-    public function verifyPasswordReset($user_name, $verification_code)
+    public function verifyPasswordReset($user_username, $verification_code)
     {
         // check if this the provided verification code fits the user's verification code
-        if (PasswordResetModel::verifyPasswordReset($user_name, $verification_code)) {
+        if (PasswordResetModel::verifyPasswordReset($user_username, $verification_code)) {
             // pass URL-provided variable to view to display them
             $this->View->render('login/resetPassword', array(
-                'user_name' => $user_name,
+                'user_username' => $user_username,
                 'user_password_reset_hash' => $verification_code
             ));
         } else {
@@ -140,7 +140,7 @@ class LoginController extends Controller
     public function setNewPassword()
     {
         PasswordResetModel::setNewPassword(
-            Request::post('user_name'), Request::post('user_password_reset_hash'),
+            Request::post('user_username'), Request::post('user_password_reset_hash'),
             Request::post('user_password_new'), Request::post('user_password_repeat')
         );
         Redirect::to('login/index');

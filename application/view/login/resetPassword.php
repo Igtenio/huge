@@ -11,7 +11,7 @@
 
         <!-- new password form box -->
         <form method="post" action="<?php echo Config::get('URL'); ?>login/setNewPassword" name="new_password_form">
-            <input type='hidden' name='user_name' value='<?php echo $this->user_name; ?>' />
+            <input type='hidden' name='user_username' value='<?php echo $this->user_username; ?>' />
             <input type='hidden' name='user_password_reset_hash' value='<?php echo $this->user_password_reset_hash; ?>' />
             <label for="reset_input_password_new">New password (min. 6 characters)</label>
             <input id="reset_input_password_new" class="reset_input" type="password"

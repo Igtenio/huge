@@ -24,11 +24,11 @@ class UserController extends Controller
     public function index()
     {
         $this->View->render('user/index', array(
-            'user_name' => Session::get('user_name'),
+            'user_username' => Session::get('user_username'),
             'user_email' => Session::get('user_email'),
             'user_gravatar_image_url' => Session::get('user_gravatar_image_url'),
             'user_avatar_file' => Session::get('user_avatar_file'),
-            'user_account_type' => Session::get('user_account_type')
+            'user_role' => Session::get('user_role')
         ));
     }
 
@@ -52,7 +52,7 @@ class UserController extends Controller
             exit();
         }
 
-        UserModel::editUserName(Request::post('user_name'));
+        UserModel::editUserName(Request::post('user_username'));
         Redirect::to('user/editUsername');
     }
 
@@ -145,7 +145,7 @@ class UserController extends Controller
     public function changePassword_action()
     {
         $result = PasswordResetModel::changePassword(
-            Session::get('user_name'), Request::post('user_password_current'),
+            Session::get('user_username'), Request::post('user_password_current'),
             Request::post('user_password_new'), Request::post('user_password_repeat')
         );
 

@@ -7,7 +7,7 @@
         <!-- echo out the system feedback (error and success messages) -->
         <?php $this->renderFeedbackMessages(); ?>
 
-        <div>Your username: <?= $this->user_name; ?></div>
+        <div>Your username: <?= $this->user_username; ?></div>
         <div>Your email: <?= $this->user_email; ?></div>
         <div>Your avatar image:
             <?php if (Config::get('USE_GRAVATAR')) { ?>
@@ -16,6 +16,6 @@
                 Your avatar pic (saved locally): <img src='<?= $this->user_avatar_file; ?>' />
             <?php } ?>
         </div>
-        <div>Your account type is: <?= $this->user_account_type; ?></div>
+        <div>Your account type is: <?= $this->user_role; ?></div>
     </div>
 </div>

@@ -174,4 +174,10 @@ class View
     {
         return htmlentities($str, ENT_QUOTES, 'UTF-8');
     }
+
+    public function convertTime($time)
+    {
+        $value = Date(m.d.Y g:ia, $time);
+        return htmlentities($value, ENT_QUOTES, 'UTF-8');
+    }
 }

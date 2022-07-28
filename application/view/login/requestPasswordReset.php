@@ -7,9 +7,9 @@
 
         <!-- request password reset form box -->
         <form method="post" action="<?php echo Config::get('URL'); ?>login/requestPasswordReset_action">
-            <label for="user_name_or_email">
+            <label for="user_username_or_email">
                 Enter your username or email and you'll get a mail with instructions:
-                <input type="text" name="user_name_or_email" required />
+                <input type="text" name="user_username_or_email" required />
             </label>
 
             <!-- show the captcha by calling the login/showCaptcha-method in the src attribute of the img tag -->

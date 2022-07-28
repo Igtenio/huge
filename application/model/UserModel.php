@@ -5,6 +5,37 @@
  * Handles all the PUBLIC profile stuff. This is not for getting data of the logged in user, it's more for handling
  * data of all the other users. Useful for display profile information, creating user lists etc.
  */
+
+ /**
+  * User database details;
+  * Table: users
+  * Columns:
+  * user_id
+  * user_fname
+  * user_mname
+  * user_lname
+  * user_email
+  * user_phone
+  * user_kh_auth
+  * user_kh_auth_pend
+  * user_username
+  * user_password_hash
+  * user_role
+  * user_active
+  * user_has_avatar
+  * user_deleted
+  * user_remember_me_token
+  * user_creation_timestamp
+  * user_suspension_timestamp
+  * user_last_login_timestamp
+  * user_failed_logins
+  * user_last_failed_login
+  * user_activation_hash
+  * user_password_reset_hash
+  * user_password_reset_timestamp
+  * user_provider_type
+  */
+
 class UserModel
 {
     /**
@@ -19,7 +50,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted FROM users";
+        $sql = "SELECT user_id, user_username, user_email, user_active, user_has_avatar, user_deleted FROM users";
         $query = $database->prepare($sql);
         $query->execute();
 
@@ -34,7 +65,7 @@ class UserModel
 
             $all_users_profiles[$user->user_id] = new stdClass();
             $all_users_profiles[$user->user_id]->user_id = $user->user_id;
-            $all_users_profiles[$user->user_id]->user_name = $user->user_name;
+            $all_users_profiles[$user->user_id]->user_username = $user->user_username;
             $all_users_profiles[$user->user_id]->user_email = $user->user_email;
             $all_users_profiles[$user->user_id]->user_active = $user->user_active;
             $all_users_profiles[$user->user_id]->user_deleted = $user->user_deleted;
@@ -53,7 +84,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email, user_active, user_has_avatar, user_deleted
+        $sql = "SELECT user_id, user_username, user_email, user_active, user_has_avatar, user_deleted
                 FROM users WHERE user_id = :user_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => $user_id));
@@ -79,18 +110,18 @@ class UserModel
     }
 
     /**
-     * @param $user_name_or_email
+     * @param $user_username_or_email
      *
      * @return mixed
      */
-    public static function getUserDataByUserNameOrEmail($user_name_or_email)
+    public static function getUserDataByUserNameOrEmail($user_username_or_email)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $query = $database->prepare("SELECT user_id, user_name, user_email FROM users
-                                     WHERE (user_name = :user_name_or_email OR user_email = :user_name_or_email)
+        $query = $database->prepare("SELECT user_id, user_username, user_email FROM users
+                                     WHERE (user_username = :user_username_or_email OR user_email = :user_username_or_email)
                                            AND user_provider_type = :provider_type LIMIT 1");
-        $query->execute(array(':user_name_or_email' => $user_name_or_email, ':provider_type' => 'DEFAULT'));
+        $query->execute(array(':user_username_or_email' => $user_username_or_email, ':provider_type' => 'DEFAULT'));
 
         return $query->fetch();
     }
@@ -98,16 +129,16 @@ class UserModel
     /**
      * Checks if a username is already taken
      *
-     * @param $user_name string username
+     * @param $user_username string username
      *
      * @return bool
      */
-    public static function doesUsernameAlreadyExist($user_name)
+    public static function doesUsernameAlreadyExist($user_username)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $query = $database->prepare("SELECT user_id FROM users WHERE user_name = :user_name LIMIT 1");
-        $query->execute(array(':user_name' => $user_name));
+        $query = $database->prepare("SELECT user_id FROM users WHERE user_username = :user_username LIMIT 1");
+        $query->execute(array(':user_username' => $user_username));
         if ($query->rowCount() == 0) {
             return false;
         }
@@ -137,16 +168,16 @@ class UserModel
      * Writes new username to database
      *
      * @param $user_id int user id
-     * @param $new_user_name string new username
+     * @param $new_user_username string new username
      *
      * @return bool
      */
-    public static function saveNewUserName($user_id, $new_user_name)
+    public static function saveNewUserName($user_id, $new_user_username)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $query = $database->prepare("UPDATE users SET user_name = :user_name WHERE user_id = :user_id LIMIT 1");
-        $query->execute(array(':user_name' => $new_user_name, ':user_id' => $user_id));
+        $query = $database->prepare("UPDATE users SET user_username = :user_username WHERE user_id = :user_id LIMIT 1");
+        $query->execute(array(':user_username' => $new_user_username, ':user_id' => $user_id));
         if ($query->rowCount() == 1) {
             return true;
         }
@@ -177,36 +208,36 @@ class UserModel
     /**
      * Edit the user's name, provided in the editing form
      *
-     * @param $new_user_name string The new username
+     * @param $new_user_username string The new username
      *
      * @return bool success status
      */
-    public static function editUserName($new_user_name)
+    public static function editUserName($new_user_username)
     {
         // new username same as old one ?
-        if ($new_user_name == Session::get('user_name')) {
+        if ($new_user_username == Session::get('user_username')) {
             Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_SAME_AS_OLD_ONE'));
             return false;
         }
 
         // username cannot be empty and must be azAZ09 and 2-64 characters
-        if (!preg_match("/^[a-zA-Z0-9]{2,64}$/", $new_user_name)) {
+        if (!preg_match("/^[a-zA-Z0-9]{2,64}$/", $new_user_username)) {
             Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_DOES_NOT_FIT_PATTERN'));
             return false;
         }
 
         // clean the input, strip usernames longer than 64 chars (maybe fix this ?)
-        $new_user_name = substr(strip_tags($new_user_name), 0, 64);
+        $new_user_username = substr(strip_tags($new_user_username), 0, 64);
 
         // check if new username already exists
-        if (self::doesUsernameAlreadyExist($new_user_name)) {
+        if (self::doesUsernameAlreadyExist($new_user_username)) {
             Session::add('feedback_negative', Text::get('FEEDBACK_USERNAME_ALREADY_TAKEN'));
             return false;
         }
 
-        $status_of_action = self::saveNewUserName(Session::get('user_id'), $new_user_name);
+        $status_of_action = self::saveNewUserName(Session::get('user_id'), $new_user_username);
         if ($status_of_action) {
-            Session::set('user_name', $new_user_name);
+            Session::set('user_username', $new_user_username);
             Session::add('feedback_positive', Text::get('FEEDBACK_USERNAME_CHANGE_SUCCESSFUL'));
             return true;
         } else {
@@ -269,20 +300,20 @@ class UserModel
     /**
      * Gets the user's id
      *
-     * @param $user_name
+     * @param $user_username
      *
      * @return mixed
      */
-    public static function getUserIdByUsername($user_name)
+    public static function getUserIdByUsername($user_username)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id FROM users WHERE user_name = :user_name AND user_provider_type = :provider_type LIMIT 1";
+        $sql = "SELECT user_id FROM users WHERE user_username = :user_username AND user_provider_type = :provider_type LIMIT 1";
         $query = $database->prepare($sql);
 
         // DEFAULT is the marker for "normal" accounts (that have a password etc.)
         // There are other types of accounts that don't have passwords etc. (FACEBOOK)
-        $query->execute(array(':user_name' => $user_name, ':provider_type' => 'DEFAULT'));
+        $query->execute(array(':user_username' => $user_username, ':provider_type' => 'DEFAULT'));
 
         // return one row (we only have one result or nothing)
         return $query->fetch()->user_id;
@@ -291,25 +322,25 @@ class UserModel
     /**
      * Gets the user's data
      *
-     * @param $user_name string User's name
+     * @param $user_username string User's name
      *
      * @return mixed Returns false if user does not exist, returns object with user's data when user exists
      */
-    public static function getUserDataByUsername($user_name)
+    public static function getUserDataByUsername($user_username)
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_name, user_email, user_password_hash, user_active,user_deleted, user_suspension_timestamp, user_role,
+        $sql = "SELECT user_id, user_username, user_email, user_password_hash, user_active,user_deleted, user_suspension_timestamp, user_role,
                        user_failed_logins, user_last_failed_login
                   FROM users
-                 WHERE (user_name = :user_name OR user_email = :user_name)
+                 WHERE (user_username = :user_username OR user_email = :user_username)
                        AND user_provider_type = :provider_type
                  LIMIT 1";
         $query = $database->prepare($sql);
 
         // DEFAULT is the marker for "normal" accounts (that have a password etc.)
         // There are other types of accounts that don't have passwords etc. (FACEBOOK)
-        $query->execute(array(':user_name' => $user_name, ':provider_type' => 'DEFAULT'));
+        $query->execute(array(':user_username' => $user_username, ':provider_type' => 'DEFAULT'));
 
         // return one row (we only have one result or nothing)
         return $query->fetch();
@@ -328,7 +359,7 @@ class UserModel
         $database = DatabaseFactory::getFactory()->getConnection();
 
         // get real token from database (and all other data)
-        $query = $database->prepare("SELECT user_id, user_name, user_email, user_password_hash, user_active,
+        $query = $database->prepare("SELECT user_id, user_username, user_email, user_password_hash, user_active,
                                           user_role,  user_has_avatar, user_failed_logins, user_last_failed_login
                                      FROM users
                                      WHERE user_id = :user_id

@@ -30,7 +30,7 @@
                                 <img src="<?= $user->user_avatar_link; ?>" />
                             <?php } ?>
                         </td>
-                        <td><?= $user->user_name; ?></td>
+                        <td><?= $user->user_username; ?></td>
                         <td><?= $user->user_email; ?></td>
                         <td><?= ($user->user_active == 0 ? 'No' : 'Yes'); ?></td>
                         <td>

@@ -10,7 +10,7 @@
         <!-- register form -->
         <form method="post" action="<?php echo Config::get('URL'); ?>register/register_action">
             <!-- the user name input field uses a HTML5 pattern check -->
-            <input type="text" pattern="[a-zA-Z0-9]{2,64}" name="user_name" placeholder="Username (letters/numbers, 2-64 chars)" required />
+            <input type="text" pattern="[a-zA-Z0-9]{2,64}" name="user_username" placeholder="Username (letters/numbers, 2-64 chars)" required />
             <input type="text" name="user_email" placeholder="email address (a real address)" required />
             <input type="text" name="user_email_repeat" placeholder="repeat email address (to prevent typos)" required />
             <input type="password" name="user_password_new" pattern=".{6,}" placeholder="Password (6+ characters)" required autocomplete="off" />

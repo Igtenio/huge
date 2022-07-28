@@ -8,6 +8,8 @@ class ProfileController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $user_id = Session::get('user_id');
+        Auth::checkUserAuthentication($user_id);
     }
 
     /**
