@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `huge`.`users` (
- `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index',
+ `user_id` int(8) ZEROFILL NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index',
  `user_fname` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s first name',
  `user_mname` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s middle name',
  `user_lname` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s last name',
@@ -7,8 +7,7 @@ CREATE TABLE IF NOT EXISTS `huge`.`users` (
  `user_username` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s username, unique',
  `user_keyholder_authorized` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'authorized kh accounts',
  `user_keyholder_authorized_pending` varchar(128) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'pending authorized kh accounts',
-  
- `user_email` varchar(254) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s email, unique',
+ `user_email` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s email, unique',
  `user_password_hash` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'user''s password in salted and hashed format',
  `user_active` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'user''s activation status',
  `user_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'user''s deletion status',

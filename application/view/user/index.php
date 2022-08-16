@@ -7,15 +7,12 @@
         <!-- echo out the system feedback (error and success messages) -->
         <?php $this->renderFeedbackMessages(); ?>
 
-        <div>Your username: <?= $this->user_username; ?></div>
-        <div>Your email: <?= $this->user_email; ?></div>
-        <div>Your avatar image:
-            <?php if (Config::get('USE_GRAVATAR')) { ?>
-                Your gravatar pic (on gravatar.com): <img src='<?= $this->user_gravatar_image_url; ?>' />
-            <?php } else { ?>
-                Your avatar pic (saved locally): <img src='<?= $this->user_avatar_file; ?>' />
-            <?php } ?>
-        </div>
-        <div>Your account type is: <?= $this->user_role; ?></div>
+        <div>Username: <?= $this->user->user_username; ?> <a href="<?php echo Config::get('URL'); ?>user/changePassword">Change Password</a></div>
+        <div>First Name: <?= $this->user->user_fname; ?></div>
+        <div>Middle Name: <?= $this->user->user_mname; ?></div>
+        <div>Last Name: <?= $this->user->user_lname; ?></div>
+        <div>Email: <?= $this->user->user_email; ?> <a href="<?php echo Config::get('URL'); ?>user/edituseremail">Edit my email</a></div>
+        <div>Phone: <?= $this->user->user_phone; ?></div>
+        <div>Role: <?= $this->user->user_role; ?></div>
     </div>
 </div>

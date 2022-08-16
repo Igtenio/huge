@@ -50,7 +50,7 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_username, user_email, user_active, user_has_avatar, user_deleted FROM users";
+        $sql = "SELECT user_id, user_username, user_email, user_active, user_deleted, user_phone, user_fname, user_mname, user_lname, user_role FROM users";
         $query = $database->prepare($sql);
         $query->execute();
 
@@ -69,7 +69,13 @@ class UserModel
             $all_users_profiles[$user->user_id]->user_email = $user->user_email;
             $all_users_profiles[$user->user_id]->user_active = $user->user_active;
             $all_users_profiles[$user->user_id]->user_deleted = $user->user_deleted;
-            $all_users_profiles[$user->user_id]->user_avatar_link = (Config::get('USE_GRAVATAR') ? AvatarModel::getGravatarLinkByEmail($user->user_email) : AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id));
+            $all_users_profiles[$user->user_id]->user_phone = $user->user_phone;
+            $all_users_profiles[$user->user_id]->user_fname = $user->user_fname;
+            $all_users_profiles[$user->user_id]->user_mname = $user->user_mname;
+            $all_users_profiles[$user->user_id]->user_lname = $user->user_lname;
+            $all_users_profiles[$user->user_id]->user_role = $user->user_role;
+
+            //$all_users_profiles[$user->user_id]->user_avatar_link = (Config::get('USE_GRAVATAR') ? AvatarModel::getGravatarLinkByEmail($user->user_email) : AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id));
         }
 
         return $all_users_profiles;
@@ -84,21 +90,16 @@ class UserModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, user_username, user_email, user_active, user_has_avatar, user_deleted
+        $sql = "SELECT user_id, user_username, user_fname, user_mname, user_lname, user_email, user_phone, user_role, user_active, user_deleted
                 FROM users WHERE user_id = :user_id LIMIT 1";
         $query = $database->prepare($sql);
         $query->execute(array(':user_id' => $user_id));
 
         $user = $query->fetch();
 
-        if ($query->rowCount() == 1) {
-            if (Config::get('USE_GRAVATAR')) {
-                $user->user_avatar_link = AvatarModel::getGravatarLinkByEmail($user->user_email);
-            } else {
-                $user->user_avatar_link = AvatarModel::getPublicAvatarFilePathOfUser($user->user_has_avatar, $user->user_id);
-            }
-        } else {
-            Session::add('feedback_negative', Text::get('FEEDBACK_USER_DOES_NOT_EXIST'));
+        if (!$query->rowCount() == 1) {
+          Session::add('feedback_negative', Text::get('FEEDBACK_USER_DOES_NOT_EXIST'));
+          return false;
         }
 
         // all elements of array passed to Filter::XSSFilter for XSS sanitation, have a look into

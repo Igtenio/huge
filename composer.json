@@ -13,5 +13,8 @@
     },
     "autoload": {
         "psr-4": { "": ["application/core/", "application/model/"] }
+    },
+    "require": {
+        "picqer/php-barcode-generator": "^2.2"
     }
 }

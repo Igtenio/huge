@@ -177,7 +177,7 @@ class View
 
     public function convertTime($time)
     {
-        $value = Date(m.d.Y g:ia, $time);
+        $value = Date("m.d.Y g:ia", $time);
         return htmlentities($value, ENT_QUOTES, 'UTF-8');
     }
 }

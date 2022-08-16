@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>HUGE</title>
+    <title>GemChest</title>
     <!-- META -->
     <meta charset="utf-8">
     <!-- send empty favicon fallback to prevent user's browser hitting the server for lots of favicon requests resulting in 404s -->
@@ -24,6 +24,9 @@
             <?php if (Session::get("user_role") == 7) : ?>
               <li <?php if (View::checkForActiveController($filename, "profile")) { echo ' class="active" '; } ?> >
                 <a href="<?php echo Config::get('URL'); ?>profile/index">Profiles</a>
+              </li>
+              <li <?php if (View::checkForActiveController($filename, "admin")) { echo ' class="active" '; } ?> >
+                <a href="<?php echo Config::get('URL'); ?>admin/keyholderList">Keyholders</a>
               </li>
             <?php endif; ?>
         </ul>
@@ -73,7 +76,15 @@
                 <li <?php if (View::checkForActiveController($filename, "admin")) {
                     echo ' class="active" ';
                 } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>admin/">Admin</a>
+                    <a href="<?php echo Config::get('URL'); ?>admin/index">Admin</a>
+                    <ul class="navigation-submenu">
+                        <li <?php if (View::checkForActiveController($filename, "admin")) { echo ' class="active" '; } ?> >
+                            <a href="<?php echo Config::get('URL'); ?>admin/userList">User List</a>
+                        </li>
+                        <li <?php if (View::checkForActiveController($filename, "logging")) { echo ' class="active" '; } ?> >
+                            <a href="<?php echo Config::get('URL'); ?>logging/index">Logs</a>
+                        </li>
+                      </ul>
                 </li>
             <?php endif; ?>
         </ul>

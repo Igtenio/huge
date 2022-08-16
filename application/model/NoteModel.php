@@ -14,9 +14,9 @@ class NoteModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, note_id, note_text FROM notes WHERE user_id = :user_id";
+        $sql = "SELECT note_id, note_text, note_author FROM notes WHERE note_author = :note_author";
         $query = $database->prepare($sql);
-        $query->execute(array(':user_id' => Session::get('user_id')));
+        $query->execute(array(':note_author' => Session::get('user_id')));
 
         // fetchAll() is the PDO method that gets all result rows
         return $query->fetchAll();
@@ -31,9 +31,9 @@ class NoteModel
     {
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "SELECT user_id, note_id, note_text FROM notes WHERE user_id = :user_id AND note_id = :note_id LIMIT 1";
+        $sql = "SELECT note_author, note_id, note_text FROM notes WHERE note_author = :note_author AND note_id = :note_id LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':user_id' => Session::get('user_id'), ':note_id' => $note_id));
+        $query->execute(array(':note_author' => Session::get('user_id'), ':note_id' => $note_id));
 
         // fetch() is the PDO method that gets a single result
         return $query->fetch();
@@ -44,7 +44,7 @@ class NoteModel
      * @param string $note_text note text that will be created
      * @return bool feedback (was the note created properly ?)
      */
-    public static function createNote($note_text)
+    public static function createNote($note_text, $note_subject = null)
     {
         if (!$note_text || strlen($note_text) == 0) {
             Session::add('feedback_negative', Text::get('FEEDBACK_NOTE_CREATION_FAILED'));
@@ -53,11 +53,16 @@ class NoteModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "INSERT INTO notes (note_text, user_id) VALUES (:note_text, :user_id)";
+        $sql = "INSERT INTO notes (note_text, note_author, note_subject, note_time) VALUES (:note_text, :note_author, :note_subject, :note_time)";
         $query = $database->prepare($sql);
-        $query->execute(array(':note_text' => $note_text, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':note_text' => $note_text, ':note_author' => Session::get('user_id'), ':note_subject' => $note_subject, ':note_time' => time()));
 
         if ($query->rowCount() == 1) {
+            if (!$note_subject == null) {
+              LoggingModel::createLog('Note Creation - User Account',null,$note_subject);
+            } else {
+              LoggingModel::createLog('Note Creation - Personal');
+            }
             return true;
         }
 
@@ -80,11 +85,12 @@ class NoteModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "UPDATE notes SET note_text = :note_text WHERE note_id = :note_id AND user_id = :user_id LIMIT 1";
+        $sql = "UPDATE notes SET note_text = :note_text, note_time = :note_time WHERE note_id = :note_id AND note_author = :note_author LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':note_id' => $note_id, ':note_text' => $note_text, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':note_id' => $note_id, ':note_time' => time(), ':note_text' => $note_text, ':note_author' => Session::get('user_id')));
 
         if ($query->rowCount() == 1) {
+            LoggingModel::createLog('Note Edit',Session::get('user_id'),$note_id);
             return true;
         }
 
@@ -105,11 +111,12 @@ class NoteModel
 
         $database = DatabaseFactory::getFactory()->getConnection();
 
-        $sql = "DELETE FROM notes WHERE note_id = :note_id AND user_id = :user_id LIMIT 1";
+        $sql = "DELETE FROM notes WHERE note_id = :note_id AND note_author = :note_author LIMIT 1";
         $query = $database->prepare($sql);
-        $query->execute(array(':note_id' => $note_id, ':user_id' => Session::get('user_id')));
+        $query->execute(array(':note_id' => $note_id, ':note_author' => Session::get('user_id')));
 
         if ($query->rowCount() == 1) {
+            LoggingModel::createLog('Note Deletion',Session::get('user_id'),$note_id);
             return true;
         }
 

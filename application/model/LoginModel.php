@@ -261,6 +261,8 @@ class LoginModel
         setcookie(session_name(), session_id(), time() + Config::get('SESSION_RUNTIME'), Config::get('COOKIE_PATH'),
             Config::get('COOKIE_DOMAIN'), Config::get('COOKIE_SECURE'), Config::get('COOKIE_HTTP'));
 
+        LoggingModel::createLog('User Login', $user_id);
+
     }
 
     /**

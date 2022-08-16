@@ -24,11 +24,7 @@ class UserController extends Controller
     public function index()
     {
         $this->View->render('user/index', array(
-            'user_username' => Session::get('user_username'),
-            'user_email' => Session::get('user_email'),
-            'user_gravatar_image_url' => Session::get('user_gravatar_image_url'),
-            'user_avatar_file' => Session::get('user_avatar_file'),
-            'user_role' => Session::get('user_role')
+            'user' => UserModel::getPublicProfileOfUser(Session::get('user_id'))
         ));
     }
 

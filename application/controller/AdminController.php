@@ -24,6 +24,20 @@ class AdminController extends Controller
         );
     }
 
+    public function userList()
+    {
+        $this->View->render('admin/userList', array(
+                'users' => UserModel::getPublicProfilesOfAllUsers())
+        );
+    }
+
+    public function keyholderList()
+    {
+        $this->View->render('admin/keyholderList', array(
+                'keyholders' => KeyholderModel::getAllKeyholders())
+        );
+    }
+
     public function actionAccountSettings()
     {
         AdminModel::setAccountSuspensionAndDeletionStatus(

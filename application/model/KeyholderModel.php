@@ -21,8 +21,9 @@ class KeyholderModel
    * Get all users from database
    * TODO Nothing.
    */
-  public function getAllKeyholders()
+  public static function getAllKeyholders()
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT keyholder_id, keyholder_primary_user_id, keyholder_status, keyholder_perpetual_status, keyholder_type, keyholder_interval, keyholder_interval_count, keyholder_gems, keyholder_perpetual_gems FROM keyholders";
       $query = $database->prepare($sql);
       $query->execute();
@@ -36,6 +37,7 @@ class KeyholderModel
    */
   public function addKeyholder($keyholder_id, $keyholder_primary_user_id, $keyholder_status, $keyholder_perpetual_status, $keyholder_type, $keyholder_interval, $keyholder_interval_count, $keyholder_gems, $keyholder_perpetual_gems)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "INSERT INTO keyholders (keyholder_id, keyholder_primary_user_id, keyholder_status, keyholder_perpetual_status, keyholder_type, keyholder_interval, keyholder_interval_count, keyholder_gems, keyholder_perpetual_gems) VALUES (:keyholder_id, :keyholder_primary_user_id, :keyholder_status, :keyholder_perpetual_status, :keyholder_type, :keyholder_interval, :keyholder_interval_count, :keyholder_gems, :keyholder_perpetual_gems)";
       $query = $database->prepare($sql);
       $parameters = array(':keyholder_id' => $keyholder_id, ':keyholder_primary_user_id' => $keyholder_primary_user_id, ':keyholder_status' => $keyholder_status, ':keyholder_perpetual_status' => $keyholder_perpetual_status, ':keyholder_type' => $keyholder_type, ':keyholder_interval' => $keyholder_interval, ':keyholder_interval_count' => $keyholder_interval_count, ':keyholder_gems' => $keyholder_gems, ':keyholder_perpetual_gems' => $keyholder_perpetual_gems);
@@ -49,6 +51,7 @@ class KeyholderModel
    */
   public function deleteKeyholder($keyholder_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "DELETE FROM keyholders WHERE user_id = :keyholder_id";
       $query = $database->prepare($sql);
       $parameters = array(':keyholder_id' => $keyholder_id);
@@ -62,6 +65,7 @@ class KeyholderModel
    */
   public function getKeyholderByKH($keyholder_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT keyholder_id, keyholder_primary_user_id, keyholder_status, keyholder_perpetual_status, keyholder_type, keyholder_interval, keyholder_interval_count, keyholder_gems, keyholder_perpetual_gems FROM keyholders WHERE keyholder_id = :keyholder_id LIMIT 1";
       $query = $database->prepare($sql);
       $parameters = array(':keyholder_id' => $keyholder_id);
@@ -73,6 +77,7 @@ class KeyholderModel
 
   public function getKeyholderByUser($user_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT keyholder_id, keyholder_primary_user_id, keyholder_status, keyholder_perpetual_status, keyholder_type, keyholder_interval, keyholder_interval_count, keyholder_gems, keyholder_perpetual_gems FROM keyholders WHERE keyholder_primary_user_id = :keyholder_primary_user_id LIMIT 1";
       $query = $database->prepare($sql);
       $parameters = array(':keyholder_primary_user_id' => $user_id);
@@ -86,6 +91,7 @@ class KeyholderModel
   // Clean this up.
   public function getKeyholdersByAuthUser($user_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT user_kh_auth FROM users WHERE user_kh_auth = :user_id";
       $query = $database->prepare($sql);
       $parameters = array(':user_id' => $user_id);
@@ -113,6 +119,7 @@ class KeyholderModel
    */
   public function updateKeyholder($keyholder_id, $keyholder_primary_user_id, $keyholder_status, $keyholder_perpetual_status, $keyholder_type, $keyholder_interval, $keyholder_interval_count, $keyholder_gems, $keyholder_perpetual_gems)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "UPDATE keyholders SET keyholder_id => :keyholder_id, keyholder_primary_user_id => :keyholder_primary_user_id, keyholder_status => :keyholder_status, keyholder_perpetual_status => :keyholder_perpetual_status, keyholder_type => :keyholder_type, keyholder_interval => :keyholder_interval, keyholder_interval_count => :keyholder_interval_count, keyholder_gems => :keyholder_gems, keyholder_perpetual_gems => :keyholder_perpetual_gems WHERE keyholder_id = :keyholder_id";
       $query = $database->prepare($sql);
       $parameters = array(':keyholder_id' => $keyholder_id, ':keyholder_primary_user_id' => $keyholder_primary_user_id, ':keyholder_status' => $keyholder_status, ':keyholder_perpetual_status' => $keyholder_perpetual_status, ':keyholder_type' => $keyholder_type, ':keyholder_interval' => $keyholder_interval, ':keyholder_interval_count' => $keyholder_interval_count, ':keyholder_gems' => $keyholder_gems, ':keyholder_perpetual_gems' => $keyholder_perpetual_gems);
@@ -126,6 +133,7 @@ class KeyholderModel
    */
   public function getAmountOfKeyholders()
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT COUNT(keyholder_id) AS amount_of_keyholders FROM keyholders";
       $query = $database->prepare($sql);
       $query->execute();
@@ -135,6 +143,7 @@ class KeyholderModel
 
   public function findAuthUsers($keyholder_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT user_id, user_fname, user_mname, user_lname FROM users WHERE user_kh_auth LIKE :keyholder_id";
       $query = $database->prepare($sql);
       $parameters = array(":keyholder_id" => $keyholder_id);
@@ -145,6 +154,7 @@ class KeyholderModel
 
   public function getPriUser($user_id)
   {
+    $database = DatabaseFactory::getFactory()->getConnection();
       $sql = "SELECT user_id, user_fname, user_mname, user_lname FROM users WHERE user_id = :user_id LIMIT 1";
       $query = $database->prepare($sql);
       $parameters = array(':user_id' => $user_id);
